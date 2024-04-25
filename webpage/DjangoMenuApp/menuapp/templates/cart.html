@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+</head>
+<body>
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="text-align:center;">
+    {% if messages %}
+        {% for message in messages %}
+            <h3>{{ message }}</h3>
+        {% endfor %}
+    {% endif %}
+</div>
+
+
+<h2>Your Cart</h2>
+<ul>
+    {% for item in cart %}
+    <li>
+        {{ item.title }} - ${{ item.price | floatformat:2 }}
+        {% if item.id %}
+            <!-- Only show the remove button if item.id exists -->
+            <form action="{% url 'remove_from_cart' item.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" style="color: red;">Remove</button>
+            </form>
+        {% else %}
+            <p>Error: Item ID missing</p>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'checkout' %}">Proceed to Checkout</a>
+{% endblock %}
+</body>
+</html>

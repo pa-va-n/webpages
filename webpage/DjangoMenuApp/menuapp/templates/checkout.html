@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout</title>
+</head>
+<body>
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Your Cart</h2>
+<ul>
+    {% for item in cart %}
+    <li>{{ item.title }} - ${{ item.price }}</li>
+    {% empty %}
+    <li>Your cart is empty.</li>
+    {% endfor %}
+</ul>
+<!-- Form to handle checkout -->
+<form action="{% url 'checkout' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Buy Now</button>
+</form>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu Items</title>
+</head>
+<body>
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="text-align:center;">
+    {% if messages %}
+        {% for message in messages %}
+            <h3>{{ message }}</h3>
+        {% endfor %}
+    {% endif %}
+</div>
+<h2>Menu Items</h2>
+<ul>
+    {% for menu in menus %}
+    <li>{{ menu.title }} - {{ menu.price }}
+        <form action="{% url 'add_to_cart' menu.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Add to Cart</button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
+</body>
+</html>

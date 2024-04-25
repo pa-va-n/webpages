@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout Complete</title>
+</head>
+<body>
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Checkout Complete</h1>
+    <p>Thank you for your order! We've successfully received your purchase.</p>
+    <a href="{% url 'view_menus' %}">Return to Menus</a>
+{% endblock %}
+</body>
+</html>
